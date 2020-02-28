@@ -1,12 +1,16 @@
 import time
+import os
+
 
 start_time = time.time()
+THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 
-f = open('names_1.txt', 'r')
+
+f = open(os.path.join(THIS_FOLDER, 'names_1.txt'), 'r')
 names_1 = f.read().split("\n")  # List containing 10000 names
 f.close()
 
-f = open('names_2.txt', 'r')
+f = open(os.path.join(THIS_FOLDER, './names_2.txt'), 'r')
 names_2 = f.read().split("\n")  # List containing 10000 names
 f.close()
 
