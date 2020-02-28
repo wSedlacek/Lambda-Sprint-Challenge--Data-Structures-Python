@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Any, List
 from doubly_linked_list import DoublyLinkedList
 
 
@@ -8,7 +8,7 @@ class RingBuffer:
         self.storage = DoublyLinkedList()
         self.current = self.storage.head
 
-    def append(self, item: Union[str, int]):
+    def append(self, item: Any):
         if len(self.storage) < self.capacity:
             self.storage.add_to_tail(item)
             self.current = self.storage.tail
@@ -31,11 +31,14 @@ class RingBuffer:
 
 
 class ArrayRingBuffer:
-    def __init__(self, capacity):
-        pass
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+        self.storage: List[Any] = [None] * capacity
+        self.current = 0
 
-    def append(self, item):
-        pass
+    def append(self, item: Any):
+        self.storage[self.current] = item
+        self.current = self.current + 1 if self.current < self.capacity - 1 else 0
 
     def get(self):
-        pass
+        return [item for item in self.storage if item is not None]
